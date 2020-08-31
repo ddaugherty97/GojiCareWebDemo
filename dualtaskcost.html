@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landing page</title>
+    <style>
+      /* The sidebar menu */
+      .sidenav { height: 100%; width: 200px; position: fixed; z-index: 1; top: 0; left: 0;background-color: #1111; overflow-x: hidden; padding-top: 40px;}
+      .sidenav a {padding: 6px 8px 6px 16px;text-decoration: none;font-size: 25px;color: #6F7172;display: block;}
+      .sidenav a:hover {color: #111 ;}
+      .main {margin-left: 210px; padding: 0px 10px;position: absolute;width:80%;height:100%}
+      div{position: absolute; width: 50%; height:50%  border: 1px solid #000}
+      #div1{top: 150px; left: 130px;}
+      #div2{position: absolute;top: 50px; left: 310px; }
+      #div3{top: 550px; left: 120px; }
+      #div4{top: 520px; left: 300px; }
+      div hr {position: absolute;width: 100%;margin: 0;}
+      #hr1{top: 150px; left: 0px; }
+      #hr2{top:470px;left:0px;}
+    </style>
+    <script  src = "chart.js">
+    </script>
+
+      </head>
+      <body>
+        <!-- Side navigation -->
+        <div class="sidenav" >
+          <a href="hello.html">Gait analysis</a>
+          <a href="overall.html" style = "font-size: 20px">Overall</a>
+          <a href="temporal.html" style = "font-size: 20px">Temporal parameter</a>
+          <a href="temporal.html" style = "font-size: 20px">Spatial parameter</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride length</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride width</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Step height</a>
+          <a href="kinematic.html" style = "font-size: 20px">Kinematic parameter</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;knee bend angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Trunk forward lean angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Lateral trunk lean angle</a>
+          <a href="dualtaskcost.html" style = "font-size: 20px">Dual task cost</a>
+        </div>
+
+        <!-- Page content -->
+        <div class="main">
+        <button style="border: solid;background-color: white;font-size: 25px;padding:6px 20px 6px 20px">Kinematic parameters</button>
+        <hr >
+        <div id="div1">
+        <button style="color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:150px;">Speed</button><br>
+        <button style="position:relative;color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:150px;">Stride length</button><br>
+        <button style="position:relative;color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:150px;">Step height</button>
+         </div>
+         <div id="div2">
+        <p style="text-align:right;font-size:20px;">Dual task cost(%): <a style="text-align:center;font-size:30px;color:#0DB5FE">-15</a></p>
+        <canvas id="lineChart" height="400" width="600"></canvas>
+        <script>
+
+        var data = {labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+        datasets: [{label: "Knee bend angle",borderColor: "#0DB5FE",backgroundColor:"transparent",pointRadius: 0,borderWidth:2,
+                data: [1.0, 1.2, 1.1, 1.3,1.2,0.9,0.8,0.7,0.7,0.7,0.8,0.8,0.9,1,1,1]}]};
+        var ctx = document.getElementById("lineChart");
+        var lineChart = new Chart(ctx,{type: 'line',data : data,options:{legend: {display: false},scales: {xAxes: [{scaleLabel: {display: true,labelString: 'Gait cycle'}}]}}});
+       </script>
+
+        <canvas id="dual" width="500" height="100"></canvas>
+        <script>
+        var barOptions_stacked1 = {tooltips: {enabled: false},animation: {duration: 0,
+        onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillStyle = '#ffffff';
+                this.data.datasets.forEach(function (dataset, i) {
+                var meta = chartInstance.controller.getDatasetMeta(i);
+                meta.data.forEach(function (bar, index) {
+                    var data = dataset.data[index];
+                    });});}},
+        scales: {xAxes: [{ticks: {display: false,},scaleLabel: {display: false},gridLines: {display: false},stacked: true}],
+                         yAxes: [{    barPercentage: 0.3,  categoryPercentage: 1,gridLines: {display: false,},ticks: {fontSize: 20},stacked: true}]},
+                         legend: {display: false}};
+        var ctx1 = document.getElementById("dual");
+            var dual = new Chart(ctx1, {
+                type: 'horizontalBar',
+                data: {
+                    labels: ["    ", "    ","    "],
+                    datasets: [{
+                            data: [15,12,3],
+                            backgroundColor: "#0DB5FE",
+                            hoverBackgroundColor: "#6F7172",
+                        }, {
+                            data: [0,3,5],
+                            backgroundColor: "#ffffff",
+                            hoverBackgroundColor: "#0DB5FE",
+                        },{
+                            data: [0,0,3],
+                            backgroundColor: "#0DB5FE",
+                            hoverBackgroundColor: "#0DB5FE",
+                        },{
+                            data: [0,0,4],
+                            backgroundColor: "#ffffff",
+                            hoverBackgroundColor: "#0DB5FE",
+                        }]
+                },
+                options: barOptions_stacked1
+            });
+        </script>
+      </div>
+      <div id="div3">
+      <button style="color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:200px;">Selective attention</button><br >
+      <button style="position:relative;color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:200px;">Depth perception</button><br>
+      <button style="position:relative;color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:200px;">Inhibition</button>
+     </div>
+<script  src = "api.js">
+</script>
+
+  </body>
+
+</html>

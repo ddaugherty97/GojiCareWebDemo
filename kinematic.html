@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landing page</title>
+    <style>
+      /* The sidebar menu */
+      .sidenav { height: 100%; width: 200px; position: fixed; z-index: 1; top: 0; left: 0;background-color: #1111; overflow-x: hidden; padding-top: 40px;}
+      .sidenav a {padding: 6px 8px 6px 16px;text-decoration: none;font-size: 25px;color: #6F7172;display: block;}
+      .sidenav a:hover {color: #111 ;}
+      .main {margin-left: 210px; padding: 0px 10px;position: absolute;width:80%;height:100%}
+      div{position: absolute; width: 40%; height:50%  border: 1px solid #000}
+      #div1{top: 150px; left: 100px; }
+      #div2{position: absolute;top: 120px; left: 360px; }
+      #div3{top: 520px; left: 300px; }
+      div hr {position: absolute;width: 100%;margin: 0;}
+      #hr1{top: 150px; left: 0px; }
+      #hr2{top:470px;left:0px;}
+    </style>
+    <script  src = "chart.js">
+    </script>
+
+      </head>
+      <body>
+        <!-- Side navigation -->
+        <div class="sidenav" >
+          <a href="hello.html">Gait analysis</a>
+          <a href="overall.html" style = "font-size: 20px">Overall</a>
+          <a href="temporal.html" style = "font-size: 20px">Temporal parameter</a>
+          <a href="temporal.html" style = "font-size: 20px">Spatial parameter</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride length</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride width</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Step height</a>
+          <a href="kinematic.html" style = "font-size: 20px">Kinematic parameter</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;knee bend angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Trunk forward lean angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Lateral trunk lean angle</a>
+          <a href="dualtaskcost.html" style = "font-size: 20px">Dual task cost</a>
+        </div>
+
+        <!-- Page content -->
+        <div class="main">
+        <button style="border: solid;background-color: white;font-size: 25px;padding:6px 20px 6px 20px">Kinematic parameters</button>
+        <hr >
+        <div id="div1">
+        <button style="color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:250px;">Knee bend angle</button>
+        <button style="position:relative;color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:250px;">Lateral trunk lean angle</button>
+        <button style="position:relative;color: #6F7172;border: solid;background-color: white;font-size: 15px;padding:6px 20px 6px 20px;width:250px;">Trunk forward lean angle</button>
+         </div>
+         <div id="div2">
+        <canvas id="lineChart" height="150" width="250"></canvas>
+        <script>
+
+        var data = {labels: [0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+        datasets: [{label: "Knee bend angle",borderColor: "#0DB5FE",backgroundColor:"transparent",pointRadius: 0,borderWidth:2,
+                data: [180, 178, 170, 170, 171, 173, 177, 179, 180, 180,180]},
+                {label: "Knee bend angle",borderColor: "#6F7172",backgroundColor:"transparent",fill:false,pointRadius: 0,borderWidth:1,borderDash: [10,10],
+                        data: [180, 177, 168, 169, 169, 172, 175, 178, 178, 178,180]},
+                {label: "Knee bend angle",borderColor: "#6F7172",fill:'-1',pointRadius: 0,borderWidth:1,borderDash: [10,10],
+                        data: [180, 179, 172, 171, 172, 174, 178, 180, 180, 180,180]}]};
+        var ctx = document.getElementById("lineChart");
+        var lineChart = new Chart(ctx,{type: 'line',data : data,options:{legend: {display: false},scales: {xAxes: [{scaleLabel: {display: true,labelString: 'Completion of gait cycle'}}]}}});
+       </script>
+       </div>
+
+
+      <div id="div3">
+        <table  style="border: 1px solid gray;font-size:22px  " >
+        <tr>
+       <td style="border: 1px solid gray;padding:8px "></td>
+        <td style="border: 1px solid gray;padding:8px ">Variability</td>
+        <td style="border: 1px solid gray;padding:8px ">Symmetry</td>
+        <td style="border: 1px solid gray;padding:8px ">Balance</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid gray;padding:8px ">Warming up</td>
+           <td style="border: 1px solid gray;padding:8px ">88</td>
+           <td style="border: 1px solid gray;padding:8px ">79</td>
+           <td style="border: 1px solid gray;padding:8px ">90</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid gray;padding:8px ">Gameplay</td>
+           <td style="border: 1px solid gray;padding:8px ">88</td>
+           <td style="border: 1px solid gray;padding:8px ">79</td>
+           <td style="border: 1px solid gray;padding:8px ">90</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid gray;padding:8px;background-Color:#f2f2f2;color:#0DB5FE ">Dual task cost</td>
+           <td style="border: 1px solid gray;padding:8px;background-Color:#f2f2f2;color:#0DB5FE ">88</td>
+           <td style="border: 1px solid gray;padding:8px;background-Color:#f2f2f2;color:#0DB5FE ">79</td>
+           <td style="border: 1px solid gray;padding:8px;background-Color:#f2f2f2;color:#0DB5FE ">90</td>
+        </tr>
+        </table>
+      </div>
+      <hr id="hr2">
+      <button style="position:absolute; top:428px;left:0px;border: solid;background-color: white;font-size: 25px;padding:6px 20px 6px 20px">Dual task cost</button>
+
+<script  src = "api.js">
+</script>
+
+  </body>
+
+</html>

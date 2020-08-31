@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landing page</title>
+    <style>
+      /* The sidebar menu */
+      .sidenav { height: 100%; width: 200px; position: fixed; z-index: 1; top: 0; left: 0;background-color: #1111; overflow-x: hidden; padding-top: 40px;}
+      .sidenav a {padding: 6px 8px 6px 16px;text-decoration: none;font-size: 25px;color: #6F7172;display: block;}
+      .sidenav a:hover {color: #111 ;}
+      .main {margin-left: 210px; padding: 0px 10px;position: absolute;width:80%;height:100%}
+      div{position: absolute; width: 40%; height:50%  border: 1px solid #000}
+      #div1{top: 150px; left: 0; }
+      #div2{ top: 150px; left: 200px; }
+      #div3{ top: 150px; left: 400px; }
+      #div4{ top: 150px; left: 75%; }
+      #div5{ top: 450px; left:0}
+      #div6{ top: 450px; left:300px}
+      #div7{ top: 450px; left:600px}
+    </style>
+    <script  src = "chart.js">
+    </script>
+
+      </head>
+      <body>
+        <!-- Side navigation -->
+        <div class="sidenav" >
+          <a href="hello.html">Gait analysis</a>
+          <a href="overall.html" style = "font-size: 20px">Overall</a>
+          <a href="temporal.html" style = "font-size: 20px">Temporal parameter</a>
+          <a href="temporal.html" style = "font-size: 20px">Spatial parameter</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride length</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride width</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Step height</a>
+          <a href="kinematic.html" style = "font-size: 20px">Kinematic parameter</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;knee bend angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Trunk forward lean angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Lateral trunk lean angle</a>
+          <a href="dualtaskcost.html" style = "font-size: 20px">Dual task cost</a>
+        </div>
+
+        <!-- Page content -->
+        <div class="main">
+        <button style="border: solid;background-color: white;font-size: 25px;padding:6px 20px 6px 20px">Overall</button>
+        <hr >
+        <div id="div1">
+          <p style="text-align:center;font-size:20px;">Variability</p>
+          <canvas id="mypieChart" width="20%" height="10%" ></canvas>
+          <script>
+          var ctx = document.getElementById('mypieChart');
+          var mypieChart = new Chart(ctx, {
+          type: 'pie',
+          data : {datasets: [{data: [40,60],backgroundColor: ["#FFFFFF","#0DB5FE"]}]}
+          //options: {scale: {angleLines: {display: false},ticks: {suggestedMin: 5,suggestedMax: 30}}},
+          });
+         </script>
+         </div>
+       <div id="div2">
+          <p style="text-align:center;font-size:20px;">Symmetry</p>
+         <canvas id="mypieChart1" width="20%" height="10%" ></canvas>
+         <script>
+         var ctx = document.getElementById('mypieChart1');
+         var mypieChart1 = new Chart(ctx, {
+         type: 'pie',
+         data : {datasets: [{data: [40,60],backgroundColor: ["#FFFFFF","#0DB5FE"]}]}
+         //options: {scale: {angleLines: {display: false},ticks: {suggestedMin: 5,suggestedMax: 30}}},
+         });
+        </script>
+         </div>
+      <div id="div3">
+         <p style="text-align:center;font-size:20px;">Balance</p>
+         <canvas id="mypieChart2" width="20%" height="10%" ></canvas>
+         <script>
+         var ctx = document.getElementById('mypieChart2');
+         var mypieChart2 = new Chart(ctx, {
+         type: 'pie',
+         data : {datasets: [{data: [40,60],backgroundColor: ["#FFFFFF","#0DB5FE"]}]}
+         //options: {scale: {angleLines: {display: false},ticks: {suggestedMin: 5,suggestedMax: 30}}},
+         });
+        </script>
+         </div>
+      <div id="div4" style="font-size:25px; color:#6F7172 ">
+         <table  style="border: 1px solid gray;  " >
+         <tr>
+        <td style="border: 1px solid gray;padding:8px ">Duration(s)</td>
+         <td style="border: 1px solid gray;padding:8px ">0</td>
+         </tr>
+         <tr>
+         <td style="border: 1px solid gray ;padding:8px">Distance(m)</td>
+         <td style="border: 1px solid gray;padding:8px ">0</td>
+         </tr>
+         <tr>
+         <td style="border: 1px solid gray;padding:8px ">Cadence(steps/min)</td>
+         <td style="border: 1px solid gray;padding:8px ">0</td>
+         </tr>
+         <tr>
+         <td style="border: 1px solid gray ;padding:8px">Speed(m/s)</td>
+         <td style="border: 1px solid gray;padding:8px ">0</td>
+         </tr>
+         </table>
+  </div>
+  <div id="div5">
+    <p style="text-align:center;font-size:20px;">Selective attention:</p><p style="text-align:center;font-size:90px;color:#0DB5FE">45<a style="font-size:20px;color:#6F7172">gait cycles</a></p></div>
+  <div id="div6">
+    <p style="text-align:center;font-size:20px;">Inhibition:</p><p style="text-align:center;font-size:90px;color:#0DB5FE">15<a style="font-size:20px;color:#6F7172">gait cycles</a></p></div>
+  <div id="div7">
+    <p style="text-align:center;font-size:20px;">Depth perception:</p><p style="text-align:center;font-size:90px;color:#0DB5FE">20<a style="font-size:20px;color:#6F7172">gait cycles</a></p></div>
+<script  src = "api.js">
+</script>
+
+  </body>
+
+</html>

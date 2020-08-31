@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landing page</title>
+    <style>
+      /* The sidebar menu */
+      .sidenav { height: 100%; width: 200px; position: fixed; z-index: 1; top: 0; left: 0;background-color: #1111; overflow-x: hidden; padding-top: 40px;}
+      .sidenav a {padding: 6px 8px 6px 16px;text-decoration: none;font-size: 25px;color: #6F7172;display: block;}
+      .sidenav a:hover {color: #111 ;}
+      .main {margin-left: 210px; padding: 0px 10px;position: absolute;width:80%;height:100%}
+      div{position: absolute; width: 60%; height:100%  border: 1px solid #000}
+      #div1{position:relative;top:10px; left: 100px }
+      #div2{ top: 180px; left: 750px; }
+      #div3{top:300px;left:200px}
+      #div4{top:350px;left:30px}
+      #div5{top:430px;left:200px}
+      #div6{top:480px;left:30px}
+      #div7{top:560px;left:200px}
+      #div8{top:610px;left:30px}
+    </style>
+    <script  src = "chart.js">
+    </script>
+    <script src="Plugin.Errorbars.js"></script>
+      </head>
+      <body>
+        <!-- Side navigation -->
+        <div class="sidenav" >
+          <a href="hello.html">Gait analysis</a>
+          <a href="overall.html" style = "font-size: 20px">Overall</a>
+          <a href="temporal.html" style = "font-size: 20px">Temporal parameter</a>
+          <a href="temporal.html" style = "font-size: 20px">Spatial parameter</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride length</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Stride width</a>
+          <a href="temporal.html" style = "font-size: 16px;">&#160;&#160;&#160;Step height</a>
+          <a href="kinematic.html" style = "font-size: 20px">Kinematic parameter</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;knee bend angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Trunk forward lean angle</a>
+          <a href="kinematic.html" style = "font-size: 16px;">&#160;&#160;&#160;Lateral trunk lean angle</a>
+          <a href="dualtaskcost.html" style = "font-size: 20px">Dual task cost</a>
+        </div>
+
+        <!-- Page content -->
+        <div class="main">
+        <button style="border: solid;background-color: white;font-size: 25px;padding:6px 20px 6px 20px">Temporal parameters</button>
+        <hr >
+        <div id="div2"><p style="top:20px;left:700px;font-size:20px;color:#6F7172">100% Gait cycle duration</p></div>
+        <div id="div1">
+        <p style="position:absolute;left:100px;font-size:20px;color:#6F7172">Stance duration</p>
+        <p style="position:absolute;left:400px;font-size:20px;color:#6F7172">Swing duration</p>
+        <canvas id="temporal" width="20%" height="4%"></canvas>
+        <script>
+        var barOptions_stacked1 = {
+          tooltips: {enabled: false},animation: {duration: 0,
+          onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillStyle = '#ffffff';
+                this.data.datasets.forEach(function (dataset, i) {
+                var meta = chartInstance.controller.getDatasetMeta(i);
+                meta.data.forEach(function (bar, index) {
+                    var data = dataset.data[index];
+                    ctx.fillText(data, bar._model.x -150, bar._model.y +10);});});}},
+          scales: {xAxes: [{ticks: {display: false,},scaleLabel: {display: false},gridLines: {display: false},stacked: true}],
+                         yAxes: [{    barPercentage: 0.3,  categoryPercentage: 1,gridLines: {display: false,},ticks: {fontSize: 20},stacked: true}]},
+                         legend: {display: false}};
+        var ctx1 = document.getElementById("temporal");
+        var temporal = new Chart(ctx1, {
+                type: 'horizontalBar',
+                data: {
+                    labels: ["Left", "Right"],
+                    datasets: [{
+                            data: [60,50],
+                            backgroundColor: "#0DB5FE",
+                            hoverBackgroundColor: "#6F7172",
+                        }, {
+                            data: [40,50],
+                            backgroundColor: "#6F7172",
+                            hoverBackgroundColor: "#0DB5FE",
+                        }]
+                },
+                options: barOptions_stacked1
+            });
+        </script>
+      </div>
+      <button style="border: solid;background-color: white;font-size: 25px;padding:6px 20px 6px 20px">Spatial parameters</button>
+      <hr >
+      <div id="div3">
+        <canvas id="spatial1" width="20%" height="4%"></canvas>
+        <script>
+        var barOptions_stacked1 = {tooltips: {enabled: false},plugins: {chartJsPluginErrorBars: {width: '60%',color: 'darkgray'}},
+          animation: {duration: 1,
+          onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillStyle = '#6F7172';
+                this.data.datasets.forEach(function (dataset, i) {
+                var meta = chartInstance.controller.getDatasetMeta(i);
+                meta.data.forEach(function (bar, index) {
+                    var data = dataset.data[index];
+                    ctx.fillText(data, bar._model.x +70, bar._model.y +10);});});}},
+          scales: {xAxes: [{ticks: {display: true,fontSize: 15},scaleLabel: {display: false},gridLines: {display: true},stacked: true}],
+                         yAxes: [{    barPercentage: 0.3,  categoryPercentage: 1,gridLines: {display: false,},ticks: {fontSize: 20},stacked: true}]},
+                         legend: {display: false}};
+       var ctx1 = document.getElementById("spatial1");
+       var spatial1 = new Chart(ctx1, {
+                type: 'horizontalBar',
+                data: {
+                    labels: ["Left", "Right"],
+                    datasets: [{
+                            data: [1.21,1.11],
+                            errorBars: {"Left": {plus: 0.1, minus: -0.1},"Right": {plus: 0.1, minus: -0.2}},
+                            backgroundColor: "#0DB5FE",
+                        }]
+                },
+                options: barOptions_stacked1
+            });
+        </script>
+      </div>
+      <div id="div4"><p style="font-size:20px;color:#6F7172"> Stride length</p></div>
+      <div id="div5">
+        <canvas id="spatial2" width="20%" height="4%"></canvas>
+        <script>
+        var barOptions_stacked1 = {tooltips: {enabled: false},plugins: {chartJsPluginErrorBars: {width: '60%',color: 'darkgray'}},
+          animation: {duration: 1,
+          onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillStyle = '#6F7172';
+                this.data.datasets.forEach(function (dataset, i) {
+                var meta = chartInstance.controller.getDatasetMeta(i);
+                meta.data.forEach(function (bar, index) {
+                    var data = dataset.data[index];
+                    ctx.fillText(data, bar._model.x +60, bar._model.y +10);});});}},
+          scales: {xAxes: [{ticks: {display: true,fontSize: 15},scaleLabel: {display: false},gridLines: {display: true},stacked: true}],
+                         yAxes: [{    barPercentage: 0.3,  categoryPercentage: 1,gridLines: {display: false,},ticks: {fontSize: 20},stacked: true}]},
+                         legend: {display: false}};
+        var ctx1 = document.getElementById("spatial2");
+        var spatial1 = new Chart(ctx1, {
+                type: 'horizontalBar',
+                data: {
+                    labels: ["Left", "Right"],
+                    datasets: [{
+                            data: [1.21,1.11],
+                            errorBars: {"Left": {plus: 0.1, minus: -0.1},"Right": {plus: 0.1, minus: -0.2}},
+                            backgroundColor: "#0DB5FE",
+                        }]
+                },
+                options: barOptions_stacked1
+            });
+        </script>
+      </div>
+      <div id="div6"><p style="font-size:20px;color:#6F7172"> Stride width</p></div>
+      <div id="div7">
+        <canvas id="spatial3" width="20%" height="4%"></canvas>
+        <script>
+        var barOptions_stacked1 = {tooltips: {enabled: false},plugins: {chartJsPluginErrorBars: {width: '60%',color: 'darkgray'}},
+          animation: {duration: 1,
+          onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                ctx.fillStyle = '#6F7172';
+                this.data.datasets.forEach(function (dataset, i) {
+                var meta = chartInstance.controller.getDatasetMeta(i);
+                meta.data.forEach(function (bar, index) {
+                    var data = dataset.data[index];
+                    ctx.fillText(data, bar._model.x +60, bar._model.y +10);});});}},
+          scales: {xAxes: [{ticks: {display: true,fontSize: 15},scaleLabel: {display: false},gridLines: {display: true},stacked: true}],
+                         yAxes: [{    barPercentage: 0.3,  categoryPercentage: 1,gridLines: {display: false,},ticks: {fontSize: 20},stacked: true}]},
+                         legend: {display: false}};
+        var ctx1 = document.getElementById("spatial3");
+            var spatial1 = new Chart(ctx1, {
+                type: 'horizontalBar',
+                data: {
+                    labels: ["Left", "Right"],
+                    datasets: [{
+                            data: [1.21,1.11],
+                            errorBars: {"Left": {plus: 0.1, minus: -0.1},"Right": {plus: 0.1, minus: -0.2}},
+                            backgroundColor: "#0DB5FE",
+                        }]
+                },
+                options: barOptions_stacked1
+            });
+        </script>
+      </div>
+      <div id="div8"><p style="font-size:20px;color:#6F7172"> Step height</p></div>
+<script  src = "api.js">
+</script>
+
+  </body>
+
+</html>
