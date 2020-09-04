@@ -180,6 +180,11 @@ hr {
 	text-align: center;
 }
 
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .goleft {
 	text-align: left;
 }
@@ -318,16 +323,18 @@ ul.sidebar-menu li ul.sub li a {
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    color: #aeb2b7;
+    color: #fff;
 }
 
 ul.sidebar-menu li ul.sub li a:hover {
-	color: white;
-	background: transparent;
+	color: #fff;
+	background: #0DB5FE;
 }
 
 ul.sidebar-menu li ul.sub li.active a {
-    color: #4ECDC4;
+    background: #0DB5FE;
+    color: #fff;
+
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -366,7 +373,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #4ECDC4;
+    background: #0DB5FE;
     color: #fff;
     display: block;
 
